@@ -81,8 +81,13 @@ async function fetchUserWeatherInfo(coordinates) {
     }
     catch(err) {
         loadingScreen.classList.remove("active");
-        console.log("Error found" + err );
-
+        if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+            console.error('Network error:', error.message);
+            // Handle network error, display an appropriate message to the user
+        } else {
+            console.error('Error:', error.message);
+            // Handle other errors, display a message to the user
+        }
     }
 
 }
